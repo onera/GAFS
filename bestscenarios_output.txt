@@ -1,0 +1,96 @@
+0Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (3): {'FlightSupply': 'High', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+1Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (3): {'FlightSupply': 'High', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+2Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['StartSanitaryCrisis']}
+State (4): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'Yes', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['EndSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+3Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (5): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+4Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DecreaseDemand'], 'SARS-CoV-2': ['StartSanitaryCrisis']}
+State (6): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'Yes', 'FlightDemand': 'Low'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['ReviveDemand'], 'SARS-CoV-2': ['EndSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+5Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DecreaseDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (7): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Low'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['ReviveDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+6Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['StartSanitaryCrisis']}
+State (8): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'Yes', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['EndSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+7Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (9): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+8Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DecreaseDemand'], 'SARS-CoV-2': ['StartSanitaryCrisis']}
+State (10): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'Yes', 'FlightDemand': 'Low'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['ReviveDemand'], 'SARS-CoV-2': ['EndSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+9Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DecreaseDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (11): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'High', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Low'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['ReviveDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+10Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['StartSanitaryCrisis']}
+State (12): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'Yes', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['EndSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+11Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (13): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+12Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DecreaseDemand'], 'SARS-CoV-2': ['StartSanitaryCrisis']}
+State (14): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'Yes', 'FlightDemand': 'Low'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['ReviveDemand'], 'SARS-CoV-2': ['EndSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+13Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['EstablishPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DecreaseDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (15): {'FlightSupply': 'Steady', 'LimitationPolicies': 'Yes', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Low'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['WithdrawPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['ReviveDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+14Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['StartSanitaryCrisis']}
+State (16): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'Yes', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['EndSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
+15Scenario :
+State (1): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'Steady', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['DoNothingSupply', 'DoNothingTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['IncreaseFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+State (17): {'FlightSupply': 'Steady', 'LimitationPolicies': 'No', 'TicketPrice': 'Low', 'FuelSupply': 'High', 'SanitaryCrisis': 'No', 'FlightDemand': 'Steady'}
+Decisions : {'EasyFlight': ['IncreaseSupply', 'IncreaseTicketPrice'], 'GovernmentX': ['DoNothingPolicies'], 'SuperFuel': ['DoNothingFuelSupply'], 'Customer': ['DoNothingDemand'], 'SARS-CoV-2': ['DoNothingSanitaryCrisis']}
+End of scenario : objectif(s) atteint(s)
