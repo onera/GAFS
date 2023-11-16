@@ -9,7 +9,7 @@ import numpy as np
 import tools
 
 
-def inputBDDspmf(scenarios, D, state_dict):
+def inputBDDspmf(scenarios, D, Dictio_etat):
     """
     Return database in the right format to be use in spmf tool.
 
@@ -17,15 +17,15 @@ def inputBDDspmf(scenarios, D, state_dict):
     ----------
     scenarios : List of scenarios
     D : dict of decisions
-    state_dict : dict of states
+    Dictio_etat : dict of states
 
     """
     Dnumbers = {}
     with open('inputBDD.txt','w') as f: #pas besoin de close avec le ouif (with)
         f.write('@CONVERTED_FROM_TEXT\n')
-        etatNumber = np.max(list(state_dict.keys()))
+        etatNumber = np.max(list(Dictio_etat.keys()))
         itemNumber = etatNumber + 1
-        for e in list(state_dict.keys()):
+        for e in list(Dictio_etat.keys()):
             f.write('@ITEM='+str(e)+"=Etat"+str(e)+"\n")
         for k in D.keys():
             f.write('@ITEM='+str(itemNumber)+"="+k+"\n")
@@ -362,7 +362,7 @@ def set_sufficiency (data, scenarios):
         return("There are one or more sequences that are sufficient for a conflict to happen", set)
     
         
-        
+
     
 
 

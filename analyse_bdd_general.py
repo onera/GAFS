@@ -9,6 +9,7 @@ import numpy as np
 from bokeh.io import show
 from bokeh.plotting import figure
 from bokeh.models import HoverTool, Column, TableColumn, DataTable, Row, ColumnDataSource
+from bokeh.models import Range1d
 import tools
 import matplotlib.pyplot as plt
 from matplotlib import animation
@@ -66,39 +67,104 @@ def statconflit(scenariosconflit):
     for i in scenariosconflit :
         listeconflit.append(i[len(i)-1]) #list of all the conflicts
     
-    nbconflit = len(listeconflit)
+    nbconflit1 = len(listeconflit)
+    nbconflit2=0
     var_key = list(dictvar.keys())
     dec_key = list(dictdecision.keys())
     for noeud in listeconflit :
-        for var in noeud.mean[1] :
-            if var in var_key :
-                perc = dictvar.get(var)
-                dictvar.update({var :(perc + 1)})
-                
-            else :
-                dictvar.update({var:1})
-                var_key = list(dictvar.keys())
+        all_list = noeud.mean[1]
+        for minilist in all_list :
+            nbconflit2 +=1
+            for var in minilist :
+                if var in var_key :
+                    perc = dictvar.get(var)
+                    dictvar.update({var :(perc + 1)})
+                    
+                else :
+                    dictvar.update({var:1})
+                    var_key = list(dictvar.keys())
 
         for listdec in list(noeud.mean[2].values()):
             for dec in listdec :
-                if dec.variable in noeud.mean[1] :
-                    if dec.maniere in dec_key :
-                        perc = dictdecision.get(dec.maniere)
-                        dictdecision.update({dec.maniere:(perc+1)})
-                    else:
-                        dictdecision.update({dec.maniere:1})
-                        dec_key = list(dictdecision.keys())
+                all_varlist = noeud.mean[1]
+                for varlist in all_varlist :
+                    if dec.variable in varlist :
+                        if dec.maniere in dec_key :
+                            perc = dictdecision.get(dec.maniere)
+                            dictdecision.update({dec.maniere:(perc+1)})
+                        else:
+                            dictdecision.update({dec.maniere:1})
+                            dec_key = list(dictdecision.keys())
 
     for i in dictvar :
         nb = dictvar.get(i)
-        dictvar.update({i:(nb/nbconflit)})
+        dictvar.update({i:(nb/nbconflit2)})
     
     for i in dictdecision :
         nb = dictdecision.get(i)
-        dictdecision.update({i:(nb/nbconflit)})
+        dictdecision.update({i:(nb/nbconflit1)})
 
     
     return(dictvar,dictdecision)
+
+def var_vs_var_conflict(scenariosconflict):
+    res_dict = {}
+    listnodeconflict = []
+    for scenario in scenariosconflict :
+            listnodeconflict.append(scenario[len(scenario)-1])
+    
+    for nodeconflict in listnodeconflict :
+        list_allvar = nodeconflict.mean[1]
+        for list_var in list_allvar :
+            keylist = res_dict.keys()
+            for var in list_var :
+                if var not in keylist :
+                    res_dict.update({var : {}})
+                list_var2 = copy.deepcopy(list_var)
+                list_var2.remove(var)
+                for var2 in list_var2 :
+                    var_dict = res_dict.get(var)
+                    keylist2 = var_dict.keys()
+                    if var2 not in keylist2 :
+                        var_dict.update({var2 : 1})
+                    else :
+                        var_dict[var2] +=1
+    return (res_dict)
+
+
+def statgoals(scenariosgoals):
+    """
+    Return the statistics on the variables and decisions responsible for conflict situations
+
+    Parameters : list of scenarios ending by a conflict
+    """
+    
+    dictdecision = {} #dict decision and percentage to appear in a conflict situation
+    listegoal = [] #list of node with conflicts
+    for i in scenariosgoals :
+        listegoal.append(i[len(i)-1]) #list of all the conflicts
+    
+    nbgoal = len(listegoal)
+    
+    dec_key = list(dictdecision.keys())
+    for node in listegoal :  
+        for listdec in list(node.mean.values()):
+            for dec in listdec :
+                if dec.maniere in dec_key :
+                    perc = dictdecision.get(dec.maniere)
+                    dictdecision.update({dec.maniere:(perc+1)})
+                else:
+                    dictdecision.update({dec.maniere:1})
+                    dec_key = list(dictdecision.keys())
+
+    
+    for i in dictdecision :
+        nb = dictdecision.get(i)
+        dictdecision.update({i:(nb/nbgoal)})
+
+    
+    return(dictdecision)
+
 
 #######################################################
 # graphical representation
@@ -116,7 +182,7 @@ def info_decision(scenarios, system, state_dict, principles, data_goal, data_pos
         dct.get(i).append(np.array([]))
 
     for scenario in scenarios:
-        tot = tools.nbdecisiontotalact(scenario, system, 'EasyFlight' )
+        tot = tools.nbdecisiontotalact(scenario, system, 'VolFacile' )
         for i in principles :
             decision_nb = tools.nbdecisionnuance(system,scenario,state_dict,i,data_positions,data_opinions)
             lastnode = scenario[len(scenario)-1]
@@ -149,6 +215,8 @@ def info_decision_mean1(scenarios, system, state_dict, principles, data_goal, da
 def info_decision_mean2(scenarios, system, state_dict, principles, data_goal, data_positions, data_opinions):
     """
     return a dict = {pp1:{index:mean, index2:mean}, pp2:...}
+    index : index of a scenario in the list of all generated scenario
+    mean : mean of how the pp is respected in the scenario 
     """
     dct = {}
     for i in principles:
@@ -171,25 +239,25 @@ def Newgraphettppe(scenarios,system,state_dict, data_positions,data_opinions):
     g=np.array([])
     h=np.array([])
     for scenario in scenarios :
-        a = tools.nbdecisiontotalact(scenario, system, 'EasyFlight' )
-        nb1 = tools.nbdecisionnuance(system,scenario,state_dict,"WealthCreation",data_positions,data_opinions)
+        a = tools.nbdecisiontotalact(scenario, system, 'VolFacile' )
+        nb1 = tools.nbdecisionnuance(system,scenario,state_dict,"CreationRichesse",data_positions,data_opinions)
         x = np.append(x,nb1[0]/a)
         y = np.append(y,nb1[1]/a)
-        nb2 = tools.nbdecisionnuance(system,scenario,state_dict,"EnvironmentalProtection",data_positions,data_opinions)
+        nb2 = tools.nbdecisionnuance(system,scenario,state_dict,"MinimisationImpactEnvironnement",data_positions,data_opinions)
         c = np.append(c,nb2[0]/a)
         b = np.append(b,nb2[1]/a)
-        nb3 = tools.nbdecisionnuance(system,scenario,state_dict,"CustomerSatisfaction",data_positions,data_opinions)
+        nb3 = tools.nbdecisionnuance(system,scenario,state_dict,"SatisfactionClient",data_positions,data_opinions)
         g = np.append(g,nb3[0]/a)
         h = np.append(h,nb3[1]/a)
     
     fig = figure(width=400, height=400, tools="pan, hover, reset, save")
-    fig.circle(c, b, color="green", size=15, legend_label = 'ProtectionEnvironnement')
+    fig.circle(c, b, color="green", size=15, legend_label = 'MinimisationImpactEnvironnement')
     fig.square(g, h, color="lightskyblue", size=10, alpha=0.5, legend_label = 'SatisfactionClient')
     fig.cross(x, y, color="deeppink", size=18, line_alpha=1.5 , legend_label = 'CréationRichesse')
     fig.output_backend="svg"
-
-    fig.xaxis.axis_label = "Ratio de décisions favorable à l'utilisateur"
-    fig.yaxis.axis_label = "Ratio de décisions défavorable à l'utilisateur"
+    fig.y_range = Range1d(-0.04, 0.5)
+    fig.xaxis.axis_label = "Ratio de décisions favorables à l'utilisateur"
+    fig.yaxis.axis_label = "Ratio de décisions défavorables à l'utilisateur"
     fig.legend.click_policy="hide"
     fig.legend.location = "top_right"
     show(fig)
@@ -202,14 +270,14 @@ def Linkinggraphettppe(scenarios,system,state_dict, data_positions,data_opinions
     g=np.array([])
     h=np.array([])
     for scenario in scenarios :
-        a = tools.nbdecisiontotalact(scenario, system, 'EasyFlight' )
-        nb1 = tools.nbdecisionnuance(system,scenario,state_dict,"WealthCreation",data_positions,data_opinions)
+        a = tools.nbdecisiontotalact(scenario, system, 'VolFacile' )
+        nb1 = tools.nbdecisionnuance(system,scenario,state_dict,"CreationRichesse",data_positions,data_opinions)
         x = np.append(x,nb1[0]/a)
         y = np.append(y,nb1[1]/a)
-        nb2 = tools.nbdecisionnuance(system,scenario,state_dict,"EnvironmentalProtection",data_positions,data_opinions)
+        nb2 = tools.nbdecisionnuance(system,scenario,state_dict,"MinimisationImpactEnvironnement",data_positions,data_opinions)
         c = np.append(c,nb2[0]/a)
         b = np.append(b,nb2[1]/a)
-        nb3 = tools.nbdecisionnuance(system,scenario,state_dict,"CustomerSatisfaction",data_positions,data_opinions)
+        nb3 = tools.nbdecisionnuance(system,scenario,state_dict,"SatisfactionClient",data_positions,data_opinions)
         g = np.append(g,nb3[0]/a)
         h = np.append(h,nb3[1]/a)
     
@@ -251,8 +319,8 @@ def Linkinggraphettppe(scenarios,system,state_dict, data_positions,data_opinions
     #plt.legend(loc = 'upper left') #; ??
     #plt.xlabel("nb de décisions favorables à l'utilisateur")
     #plt.ylabel("nb de décisions défavorables à l'utilisateur")
-    fig.xaxis.axis_label = "Ratio of favorable decisions for the user"
-    fig.yaxis.axis_label = "Ratio of unfavorable decisions for the user"
+    fig.xaxis.axis_label = "Ratio de décisions favorables"
+    fig.yaxis.axis_label = "Ratio de décisions défavorables"
     fig.legend.click_policy="hide"
     fig.legend.location = "top_right"
     fig2.legend.click_policy="hide"
@@ -269,16 +337,18 @@ def graph_objppe(scenarios, system, state_dict, data_positions,data_opinions, da
     ax = fig.add_subplot(projection='3d')
     dct = info_decision(scenarios, system, state_dict, principles, data_goal, data_positions, data_opinions)
     
-    clrs=['r','g','b','c','m','y','k']
-    shpe=['o','v', '*', 's', 'X','h', 'd' ]
+    clrs=['indianred','steelblue','g','c','m','y','k']
+    shpe=['o','*', 'v', 's', 'X','h', 'd' ]
     for i in range(len(principles)) :
         ppe = principles[i]
         scat = ax.scatter(dct.get(ppe)[0],dct.get(ppe)[1],dct.get(ppe)[2], s=40,facecolors='none', edgecolors=clrs[i], marker=shpe[i],label = ppe)
-    ax.set_xlabel("Ratio of favourable decisions for the user")
-    ax.set_ylabel("Ratio of unfavourable decisions for the user")
-    ax.set_zlabel("Number of goals reached")
+    ax.set_xlabel("Ratio de décisions favorables (x)")
+    ax.set_ylabel("Ratio de décisions défavorables (z)")
+    ax.set_zlabel("Nombre d'objectifs atteints (y)")
     plt.legend(loc = 'upper left')
-    #plt.show()
+    ax.view_init(elev=10., azim=70)
+    plt.savefig('fig_gif.png',dpi=800)
+    plt.show()
     def init():
         ax.view_init(elev=10., azim=0)
         return [scat]
@@ -417,7 +487,31 @@ def ppcompromised_goal(scenarios, system):
     else :
         return("Some scenarios don't require the user to compromise its principles to achieve its goals", statpp, zerotransg, res)
 
-            
+#######################################################
+# grouping by respected principle
+#######################################################
+def respected_pp(scenarios, principle, n,system,state_dict, data_positions, data_opinions) :
+    """
+    return all the scenarios that go n time against the principle 
+    """
+    res = []
+    for scenario in scenarios :
+        number = tools.nbdecisionnuance(system,scenario, state_dict, principle, data_positions, data_opinions)
+        if number[1]<=n :
+            res.append(scenario)
+    return(res)
+
+def respected_pp_allact(scenarios, principle, n,system,state_dict, data_positions, data_opinions) :
+    """
+    return all the scenarios that go n time against the principle 
+    """
+    res = []
+    for scenario in scenarios :
+        number = tools.nbdecisionnuance_allact(system,scenario, state_dict, principle, data_positions, data_opinions)
+        if number[1]<=n :
+            res.append(scenario)
+    return(res)
+
 #######################################################
 # best scenario(s)
 #######################################################
@@ -426,7 +520,7 @@ def ppcompromised_goal(scenarios, system):
 #any principle, look for the best trade-off
 def bestscenario(scenarios, principles, system, state_dict, data_goal, data_positions, data_opinions):
     """
-    retourne une liste des meileurs scénarios par principes et un dict avec leur indice dans la liste initiale
+    retourne une liste des meilleurs scénarios par principes et un dict avec leur indice dans la liste initiale
     """
     dct = info_decision_mean1(scenarios, system, state_dict, principles, data_goal, data_positions, data_opinions)
 
