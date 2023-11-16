@@ -1,0 +1,15 @@
+python=3.8
+
+bokeh
+matplotlib
+numpy
+pandas
+openpyxl
+
+# For Jupyter notebook
+ipykernel
+
+# For Plotly printing
+plotly
+python-kaleido
+nbformat>=4.2.0
